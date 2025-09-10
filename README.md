@@ -1,218 +1,194 @@
-# TASK-0
+# CAPTCHA Breaking Challenge
 
-# images for task-1
-# Handwritten Dataset Generator
+A comprehensive machine learning project that implements three different approaches to break CAPTCHA systems, ranging from basic image classification to advanced color-conditional text recognition using computer vision.
 
-This project generates a synthetic handwritten dataset of images containing random words with various styles and noise. It uses the Python `PIL` library to create these images, applies random noise, capitalizes letters randomly, and stores the images and their corresponding labels in a CSV file.
+## Project Overview
 
+This project demonstrates the evolution of CAPTCHA-breaking techniques through three distinct challenges:
 
+1. **Basic CAPTCHA Solver**: Simple CNN-based image classification
+2. **Multi-Difficulty CAPTCHA Solver**: Advanced OCR using CNN + LSTM with CTC loss
+3. **Color-Conditional CAPTCHA Solver**: Computer vision-enhanced OCR with conditional text processing
 
-## Approach
+## Project Structure
 
-1. **Word Selection**: A list of predefined words is selected randomly.
-2. **Image Generation**: Images are created with random text, font, and noise variations.
-3. **Text Noise**: Noise is applied to the image to make the text appear more handwritten.
-4. **Capitalization**: Random letters in the word are capitalized for variety.
-5. **Font & Color Variation**: Different fonts and text colors are used to diversify the dataset.
-6. **Image and Label Saving**: The images are saved in the `hdataset` folder, and a CSV file `labels.csv` records each image's name and text label.
-
-## Dependencies
-
-This project requires the following libraries:
-- `Pillow`: For image generation and manipulation.
-- `random`: For generating random numbers to apply variability.
-
-Install the required libraries using:
-
-```bash
-pip install pillow
+```
+can_you_break_the_captcha-main/
+├── codes/
+│   ├── basic_captcha_generator.py
+│   ├── basic_captcha_solver.py
+│   ├── multi_difficulty_captcha_generator.py
+│   ├── multi_difficulty_captcha_solver.py
+│   ├── color_conditional_captcha_generator.py
+│   └── color_conditional_captcha_solver.py
+├── datasets/
+│   ├── basic_dataset/
+│   ├── multi_difficulty_dataset/
+│   └── color_conditional_dataset/
+└── README.md
 ```
 
-# commands to run
-python task1imagegeneration.py
+## Setup and Installation
 
-# images for task-2
+### Prerequisites
+- Python 3.7+
+- pip package manager
 
-# Handwritten Dataset Generator
-
-This project generates a synthetic handwritten dataset consisting of both easy and hard images containing randomly generated words. It uses Python’s `PIL` (Pillow) library to create images, apply noise, capitalize random letters, and store them along with their labels in a CSV file.
-
-
-
-
-## Approach
-
-1. **Word Generation**: A random word is generated with a random length from the alphabet.
-2. **Image Generation**: The script generates images (easy and hard) containing randomly selected words.
-3. **Text Noise**: For the hard dataset, random noise is applied to make the text appear more handwritten.
-4. **Font & Capitalization**: Different fonts are chosen randomly, and letters in words are randomly capitalized.
-5. **Image and Label Saving**: The images are saved in the specified directory, and their corresponding labels are written into a CSV file.
-
-## Dependencies
-
-This project requires the following Python libraries:
-- `Pillow` (PIL Fork) for image creation and manipulation.
-- `random` for generating random values.
-
-You can install the dependencies using:
-# commands to run
-python task2imagegeneration.py
+### Dependencies Installation
 
 ```bash
-pip install pillow
+# Install required packages
+pip install torch torchvision pandas pillow opencv-python numpy
 ```
 
-
-
-# Tak-3 images generation
-
-This project generates synthetic handwritten images containing random words with customizable variations. The images are saved in a user-specified directory, and a CSV file is created with the corresponding image names and text labels.
-
-
-
-## Approach
-
-1. **Word Generation**: A random word is created with random length from the alphabet.
-2. **Image Creation**: A blank image with random background colors (`green` or `red`) is created, and text is added using randomly selected fonts.
-3. **Capitalization**: Random letters are capitalized.
-4. **Noise Addition**: Optionally, background color and text are reversed when the background is red.
-5. **CSV File**: Image names and corresponding text are written to `labels.csv`.
-
-## Dependencies
-
-This project uses the following Python libraries:
-
-- `Pillow` for image manipulation.
-- `random` for generating random values.
-
-Install the dependencies using:
-
+### Alternative installation:
 ```bash
-pip install pillow
-```
-
-python task1imagegeneration.py
-
-
-# TASK-1
-
-# Image Classification with CNN
-
-This project uses Convolutional Neural Networks (CNN) to classify images based on their corresponding text labels. The dataset consists of images stored in a specified directory, and a CSV file containing the image names and their respective labels.
-
-## Directory Structure
-
-
-
-
-
-## Dependencies
-
-This project requires the following libraries:
-
-- **torch**: The core PyTorch library for building and training the neural network.
-- **torchvision**: Provides datasets, model architectures, and image transformations.
-- **pandas**: For handling CSV files and datasets.
-- **PIL**: For loading and manipulating images.
-
-
-# You can install the necessary dependencies by running:
-
-pip install torch torchvision pandas pillow
-
--**My approach follows a supervised image classification pipeline using a CNN-based deep learning model in PyTorch.**
-
-# Data Preprocessing:
-
--**The script starts by loading the labels.csv file which contains the image names and their labels.**
-A mapping of labels to numerical indices is created for model training.
-# Dataset Class:
-
-The WordImageDataset class inherits from torch.utils.data.Dataset and is used to load images and their corresponding labels.
-Each image is loaded using PIL and transformed using a predefined set of transformations (resize, tensor conversion, normalization).
-# Model Architecture:
-
-A simple CNN model with three convolutional layers followed by fully connected layers.
-The model uses ReLU activation, max pooling, dropout for regularization, and softmax output for classification.
-# Training Loop:
-
-The model is trained using Cross-Entropy Loss and the Adam optimizer.
-The accuracy and loss are printed after each epoch.
-# Validation and Prediction:
-
-After training, the model's performance is evaluated on the validation set.
-The predicted labels are saved along with their corresponding image names in a CSV file.
-
-python task1.py
-
-
-# TASK-2
-
-# OCR Model for Text Recognition
-
-## Overview
-This project implements an Optical Character Recognition (OCR) model using PyTorch. The model consists of a CNN for feature extraction followed by an LSTM for sequence modeling. It is trained using the Connectionist Temporal Classification (CTC) loss function.
-
-## Directory Structure
-
-
-
-
-
-## Dependencies
-To install dependencies, run:
 pip install -r requirements.txt
-
-
-### Required Libraries
-- Python 3.x
-- torch
-- torchvision
-- pandas
-- numpy
-- PIL (Pillow)
-
-## Running the Project
-1. **Run the training script**
-python task2.py
-
-The script will prompt for:
-- `Enter directory name:` (Path to the dataset)
-- `Enter number of epochs:` (Number of training epochs)
-
-2. **Model Evaluation**
-- The model prints training loss and validation accuracy after each epoch.
-- After training, it evaluates test accuracy.
-
-## Approach
-### 1. Dataset Preparation  
-- Images are converted to grayscale and resized to `(32,128)`.
-- Labels are mapped to integer sequences for training.
-- Data is split into train (80%), validation (10%), and test (10%).
-
-### 2. Model Architecture  
-- A **CNN** extracts spatial features from the images.
-- An **LSTM** processes these features sequentially.
-- A **fully connected layer** maps outputs to character probabilities.
-
-### 3. Training Strategy  
-- **CTC loss** is used for training.
-- The **Adam optimizer** with a learning rate scheduler is applied.
-- Accuracy is computed using character-wise predictions.
-
-### 4. Evaluation  
-- The trained model is tested on unseen images.
-- Predictions are compared to ground-truth labels.
-
-## Prediction
-To predict text from an image:
-```python
-predicted_text = predict_text("image_path.png", model)
-print(predicted_text)
 ```
-python task2.py
 
+Required libraries:
+- `torch` - PyTorch deep learning framework
+- `torchvision` - Computer vision utilities
+- `pandas` - Data manipulation
+- `pillow` - Image processing
+- `opencv-python` - Computer vision (for color-conditional solver)
+- `numpy` - Numerical computations
 
-# TASK-3
- I t is totally same as TASK-2 just we have used the  I have just used computer vision remaining every thing is same as TASK-2
-python task1.py
+## Quick Start Guide
+
+### 1. Basic CAPTCHA Challenge
+
+**Generate Dataset:**
+```bash
+cd codes/
+python basic_captcha_generator.py
+```
+- Creates simple handwritten-style images
+- Saves images in `basic_dataset/` directory
+- Generates `labels.csv` with image-text mappings
+
+**Train and Test Model:**
+```bash
+python basic_captcha_solver.py
+```
+- Uses CNN for image classification
+- Prompts for dataset directory
+- Outputs predictions to `predictions.csv`
+
+### 2. Multi-Difficulty CAPTCHA Challenge
+
+**Generate Dataset:**
+```bash
+python multi_difficulty_captcha_generator.py
+```
+- Creates both **easy** and **hard** CAPTCHA images
+- Easy: Clean text with minimal noise
+- Hard: Multiple fonts, colors, and noise effects
+
+**Train OCR Model:**
+```bash
+python multi_difficulty_captcha_solver.py
+```
+- Implements CNN + LSTM architecture
+- Uses CTC (Connectionist Temporal Classification) loss
+- Prompts for:
+  - Dataset directory path
+  - Number of training epochs
+
+### 3. Color-Conditional CAPTCHA Challenge
+
+**Generate Dataset:**
+```bash
+python color_conditional_captcha_generator.py
+```
+- Creates images with **green** or **red** backgrounds
+- Text direction depends on background color
+- Green background = normal text
+- Red background = reversed text logic
+
+**Train Enhanced Model:**
+```bash
+python color_conditional_captcha_solver.py
+```
+- Combines OCR with computer vision
+- Detects background color using OpenCV
+- Conditionally processes text based on color detection
+
+## Model Architectures
+
+### Basic CAPTCHA Solver
+- **Architecture**: Simple CNN with fully connected layers
+- **Loss Function**: Cross-Entropy Loss
+- **Optimizer**: Adam
+- **Task**: Multi-class image classification
+
+### Multi-Difficulty CAPTCHA Solver
+- **Architecture**: CNN (feature extraction) + LSTM (sequence modeling)
+- **Loss Function**: CTC Loss for sequence prediction
+- **Input Size**: 32×128 grayscale images
+- **Output**: Variable-length text sequences
+
+### Color-Conditional CAPTCHA Solver
+- **Architecture**: CNN + LSTM + Computer Vision
+- **Additional Feature**: Background color detection
+- **Color Analysis**: RGB channel separation and intensity comparison
+- **Conditional Logic**: Text reversal based on red/green background
+
+## Technical Approaches
+
+### 1. Basic Approach
+```python
+# Simple CNN classification
+- Image → CNN → Feature Vector → Classifier → Predicted Class
+```
+
+### 2. Advanced OCR Approach
+```python
+# Sequence-to-sequence learning
+- Image → CNN → Feature Maps → LSTM → Character Probabilities → CTC Decode
+```
+
+### 3. Computer Vision Enhanced Approach
+```python
+# Multi-modal processing
+- Image → [CNN+LSTM for OCR] + [Color Detection] → Conditional Text Processing
+```
+
+## Performance Features
+
+- **Data Augmentation**: Random fonts, colors, and noise
+- **Regularization**: Dropout layers to prevent overfitting
+- **Learning Rate Scheduling**: Adaptive learning rate reduction
+- **Validation Monitoring**: Real-time accuracy tracking
+- **CTC Decoding**: Handles variable-length sequences without alignment
+
+## Customization Options
+
+### Dataset Generation Parameters:
+- **Image dimensions**: Adjustable width/height
+- **Font varieties**: Multiple font families
+- **Noise levels**: Configurable difficulty
+- **Color schemes**: Background and text colors
+- **Text length**: Variable character sequences
+
+### Training Parameters:
+- **Batch size**: Configurable for different hardware
+- **Learning rate**: Adjustable optimization speed
+- **Epochs**: Training duration control
+- **Validation split**: Train/validation/test ratios
+
+## Expected Outputs
+
+1. **Dataset Generation**: 
+   - Image files (.png)
+   - Labels CSV file
+   - Directory structure creation
+
+2. **Model Training**:
+   - Epoch-wise loss and accuracy
+   - Model convergence metrics
+   - Final test accuracy
+
+3. **Predictions**:
+   - `predictions.csv` with image names and predicted text
+   - Character-level accuracy scores
