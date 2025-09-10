@@ -180,7 +180,7 @@ python color_conditional_captcha_solver.py
 ## Expected Outputs
 
 1. **Dataset Generation**: 
-   - Image files (.png)
+   - Image files ( .png)
    - Labels CSV file
    - Directory structure creation
 
